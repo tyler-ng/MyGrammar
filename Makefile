@@ -36,13 +36,9 @@ django-shell:
 
 create-app:
 	@read -p "App name: " app_name; \
-	echo "Creating app: $$app_name"; \
-	$(COMPOSE_EXEC) $(WEB) bash -c "mkdir -p apps/$$app_name && \
-	python manage.py startapp $$app_name apps/$$app_name && \
-	sed -i 's/name = \"$$app_name\"/name = \"apps.$$app_name\"/' apps/$$app_name/apps.py && \
-	touch apps/$$app_name/urls.py && \
-	touch apps/$$app_name/serializers.py && \
-	echo 'App $$app_name created successfully in apps/$$app_name'"
+	$(COMPOSE_EXEC) $(WEB) $(MANAGE_PY) startapp $$app_name apps/$$app_name && \
+	$(COMPOSE_EXEC) $(WEB) sed -i "s/name = '$$app_name'/name = 'apps.$$app_name'/" apps/$$app_name/apps.py && \
+	echo "Created app 'apps.$$app_name'"
 
 makemigrations:
 	$(COMPOSE_EXEC) $(WEB) $(MANAGE_PY) makemigrations

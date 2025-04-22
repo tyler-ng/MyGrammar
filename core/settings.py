@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     
     # Local apps
     'apps.users',
+    'apps.grammar_checker',
 ]
 
 MIDDLEWARE = [

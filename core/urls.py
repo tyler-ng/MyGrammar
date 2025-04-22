@@ -25,6 +25,7 @@ urlpatterns = [
     # API endpoints
     path('api/v1/', include([
         path('users/', include('apps.users.urls')),
+        path('grammar/', include('apps.grammar_checker.urls')),
 
          # JWT Authentication
         path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
